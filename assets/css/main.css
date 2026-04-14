@@ -1,0 +1,28 @@
+@import "_fonts.css";
+
+body {
+    margin: 0;
+    background-color: #423f3f;
+    font-family: "Onest", sans-serif;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    margin: 0;
+}

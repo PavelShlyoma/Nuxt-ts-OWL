@@ -1,8 +1,6 @@
 <template>
-  <div>
-    LAYOUT: default;
-  </div>
- <slot></slot>
+  <Header></Header>
+  <slot></slot>
 </template>
 
 <style scoped>

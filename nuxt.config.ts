@@ -2,4 +2,15 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  css: ['~/assets/css/main.css'],
+  app: {
+    head: {
+      title: 'Testovoe',
+      link: [{rel: 'icon', type: 'image/png', href: '/icons/bsk.png'}],
+      meta: [
+        {charset: 'utf-8'},
+        {name: 'viewport', content: 'width=device-width, initial-scale=1'}
+      ]
+    }
+  },
 })
