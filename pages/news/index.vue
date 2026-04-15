@@ -2,6 +2,21 @@
 
 const { data, pending, error } = await useFetch('https://bsk-admin-test.testers-site.ru/api/news/novogodnee-vesele-ot-kompanii-bsk-kak-proshla-yelkabsk-v-2023-godu')
 
+let isOpen = ref<boolean>(false);
+
+const code = data.value.data.result.code
+console.log(code)
+
+function openPopup() {
+  isOpen.value = true;
+  history.pushState({}, '',`news/${code}`)
+}
+
+function closePopup() {
+  isOpen.value = false;
+  history.pushState({}, '',`/news`)
+}
+
 </script>
 
 <template>
@@ -19,9 +34,10 @@ const { data, pending, error } = await useFetch('https://bsk-admin-test.testers-
       <div class="news-error" v-else-if="error">
         Ошибка загрузки новости: {{ error.message }}
       </div>
-      <div v-else>
+      <button :disabled="isOpen" class="news-button--open" @click="openPopup" v-else>
         <News :data="data"></News>
-      </div>
+      </button>
+      <NewsPopup @closePopup="closePopup" v-if="isOpen"></NewsPopup>
     </div>
   </section>
 </template>
@@ -31,7 +47,6 @@ const { data, pending, error } = await useFetch('https://bsk-admin-test.testers-
 .news {
   min-height: 100vh;
   max-width: calc(100% - 64px);
-  border-radius: 16px;
   margin: 0 auto;
 }
 
@@ -64,6 +79,12 @@ const { data, pending, error } = await useFetch('https://bsk-admin-test.testers-
   font-size: 18px;
   font-weight: bold;
   color: red;
+}
+
+.news-button--open {
+  margin: 0 auto;
+  display: block;
+  padding: 0;
 }
 
 </style>

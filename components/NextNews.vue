@@ -1,21 +1,15 @@
 <script setup lang="ts">
 
-const props = defineProps(["data"]);
-console.log("props", props.data.data.result);
+const props = defineProps(["src", "title", "date", "tags"]);
 
-const { src, title, date, tags } = useNews();
 
-src.value = props.data.data.result.meta.elementOgImage.src;
-title.value = props.data.data.result.meta.elementPageTitle;
-date.value = props.data.data.result.date;
-tags.value = props.data.data.result.tags;
 </script>
 
 <template>
   <section class="news-section">
-    <div class="news-card-arrow">
+    <button class="news-card-arrow">
       <img src="@/public/image/arrow.png" alt="Открыть">
-    </div>
+    </button>
     <div class="news-card-date">
       {{ date }}
     </div>
@@ -28,8 +22,8 @@ tags.value = props.data.data.result.tags;
           {{ title }}
         </div>
         <div class="news-card-content-links">
-          <div v-for="(tag, index) in tags" :key="index">
-            <div v-for="(type, index) in tag.values" :key="index">
+          <div class="news-card-content-tag" v-for="(tag, index) in tags" :key="index">
+            <div class="news-card-content-type" v-for="(type, index) in tag.values" :key="index">
               <button :style="{ color: type.color, borderColor: type.color }" class="news-card-content-button">
                 <div v-if="type.src">
                   <img :src="type.src" alt="1" />
@@ -48,19 +42,17 @@ tags.value = props.data.data.result.tags;
 
 .news-section {
   position: relative;
-  margin: 0 auto;
-  cursor: pointer;
-  width: 1056px;
 }
 
 .news-card {
-  border-radius: 24px;
-  background-color: rgba(148, 175, 176, 0.1);;
-  display: flex;
-  gap: 24px;
-  mask-image: url("@/public/image/mask-news.png");
+  mask-image: url("@/public/image/mask-popup-news.png");
+  width: 100%;
   mask-position: right;
   mask-size: 100% 100%;
+  background-color: rgba(148, 175, 176, 0.2);;
+  border-radius: 24px;
+  display: flex;
+  gap: 24px;
 }
 
 .news-card-date {
@@ -75,7 +67,9 @@ tags.value = props.data.data.result.tags;
 }
 
 .news-card-arrow {
-  box-shadow: 0 4rem 12rem #1e1a230d, 0 2rem 6rem #5912731a, 0 1rem 2rem #3e4a5905;
+  -webkit-box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
+  -moz-box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
+  box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
   position: absolute;
   background-color: white;
   border-radius: 24px;
@@ -129,6 +123,18 @@ tags.value = props.data.data.result.tags;
   border: 1px solid #e4e4e4;
   padding: 4px 12px;
   border-radius: 20px;
+  display: flex;
+  gap: 4px;
+}
+
+.news-card-content-type {
+  display: flex;
+  gap: 4px;
+}
+
+.news-card-content-tag {
+  display: flex;
+  gap: 4px;
 }
 
 

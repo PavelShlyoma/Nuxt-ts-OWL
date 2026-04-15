@@ -47,8 +47,11 @@ header {
   max-width: calc(100% - 64px);
   border-radius: 16px;
   margin: 8px auto;
-  align-content: center;
   height: 68px;
+  position: sticky;
+  top: 8px;
+  box-shadow: 0 4rem 12rem #1e1a230d, 0 2rem 6rem #5912731a, 0 1rem 2rem #3e4a5905;
+  z-index: 10;
 }
 
 .header-container {
@@ -57,6 +60,7 @@ header {
   justify-content: space-between;
   margin: 0 auto;
   max-width: calc(100% - 128px);
+  height: 100%;
 }
 
 .header-nav {
@@ -113,25 +117,31 @@ header {
 .header-nav-button-content::before {
   content: "";
   position: absolute;
-  height: 1px;
-  width: 12px;
+  height: 2px;
+  width: 18px;
   border-radius: 2px;
   background: #D52E52;
   background: linear-gradient(90deg, rgba(213, 46, 82, 1) 0%, rgba(189, 45, 98, 1) 14%, rgba(152, 44, 122, 1) 58%, rgba(111, 47, 131, 1) 86%, rgba(90, 37, 105, 1) 100%);
 }
 
 .header-nav-button-content {
-  width: 24px;
+  width: 34px;
 }
 
 .header-nav-button-content::after {
   top: 5px;
-  left: 10px;
+  left: 14px;
 }
 
 .header-nav-button-content::before {
   top: -5px;
   left: 2px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .header-nav {
+    display: none;
+  }
 }
 
 </style>
