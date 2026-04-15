@@ -2,29 +2,35 @@
 
 const props = defineProps(["src", "title", "date", "tags"]);
 
-
 </script>
 
 <template>
-  <section class="news-section">
-    <button class="news-card-arrow">
-      <img src="@/public/image/arrow.png" alt="Открыть">
+  <section class="next-news-section">
+    <button class="next-news-card-arrow">
+      <img class="next-news-card-arrow-desktop" src="@/public/image/arrow.png" alt="Открыть">
+      <img class="next-news-section-arrow-mobile" src="@/public/image/mobile-arrow.png" alt="Открыть">
     </button>
-    <div class="news-card-date">
+
+    <div class="next-news-card-date">
       {{ date }}
     </div>
-    <div class="news-card">
-      <div class="news-card-poster">
-        <img class="news-card-image" :src="src" alt="Картинка">
+
+    <div class="next-news-card">
+
+      <div class="next-news-card-poster">
+        <img class="next-news-card-image" :src="src" alt="Картинка">
       </div>
-      <div class="news-card-content">
-        <div class="news-card-content-title">
+
+      <div class="next-news-card-content">
+
+        <div class="next-news-card-content-title">
           {{ title }}
         </div>
-        <div class="news-card-content-links">
-          <div class="news-card-content-tag" v-for="(tag, index) in tags" :key="index">
-            <div class="news-card-content-type" v-for="(type, index) in tag.values" :key="index">
-              <button :style="{ color: type.color, borderColor: type.color }" class="news-card-content-button">
+
+        <div class="next-news-card-content-links">
+          <div class="next-news-card-content-tag" v-for="(tag, index) in tags" :key="index">
+            <div class="next-news-card-content-type" v-for="(type, typeIndex) in tag.values" :key="typeIndex">
+              <button :style="{ color: type.color, borderColor: type.color }" class="next-news-card-content-button">
                 <div v-if="type.src">
                   <img :src="type.src" alt="1" />
                 </div>
@@ -33,6 +39,7 @@ const props = defineProps(["src", "title", "date", "tags"]);
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -40,11 +47,11 @@ const props = defineProps(["src", "title", "date", "tags"]);
 
 <style scoped>
 
-.news-section {
+.next-news-section {
   position: relative;
 }
 
-.news-card {
+.next-news-card {
   mask-image: url("@/public/image/mask-popup-news.png");
   width: 100%;
   mask-position: right;
@@ -55,7 +62,7 @@ const props = defineProps(["src", "title", "date", "tags"]);
   gap: 24px;
 }
 
-.news-card-date {
+.next-news-card-date {
   position: absolute;
   color: white;
   padding: 8px 16px;
@@ -66,7 +73,7 @@ const props = defineProps(["src", "title", "date", "tags"]);
   top: 16px;
 }
 
-.news-card-arrow {
+.next-news-card-arrow {
   -webkit-box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
   -moz-box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
   box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
@@ -82,25 +89,25 @@ const props = defineProps(["src", "title", "date", "tags"]);
   top: 0;
 }
 
-.news-card-poster {
+.next-news-card-poster {
   width: 320px;
   height: 220px;
   border-radius: 24px;
   overflow: hidden;
 }
 
-.news-card-image {
+.next-news-card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.news-card-content {
+.next-news-card-content {
   display: flex;
   flex-direction: column;
 }
 
-.news-card-content-title {
+.next-news-card-content-title {
   color: #423F3F;
   font-weight: bold;
   padding-top: 16px;
@@ -108,7 +115,7 @@ const props = defineProps(["src", "title", "date", "tags"]);
   max-width: 580px;
 }
 
-.news-card-content-links {
+.next-news-card-content-links {
   display: flex;
   align-items: center;
   margin-top: auto;
@@ -116,7 +123,7 @@ const props = defineProps(["src", "title", "date", "tags"]);
   padding-bottom: 20px;
 }
 
-.news-card-content-button {
+.next-news-card-content-button {
   background: none;
   font-size: 14px;
   font-weight: 400;
@@ -127,15 +134,61 @@ const props = defineProps(["src", "title", "date", "tags"]);
   gap: 4px;
 }
 
-.news-card-content-type {
+.next-news-card-content-type {
   display: flex;
   gap: 4px;
 }
 
-.news-card-content-tag {
+.next-news-card-content-tag {
   display: flex;
   gap: 4px;
 }
 
+.next-news-section-arrow-mobile {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .next-news-card {
+    flex-direction: column;
+    gap: 16px;
+    mask-image: none;
+    margin-bottom: 20px;
+    background-color: white;
+  }
+
+  .next-news-card-content {
+    gap: 16px;
+  }
+
+  .next-news-card-content-title {
+    font-size: 14px ;
+  }
+
+  .next-news-card-poster {
+    width: 100%;
+    height: 100%;
+  }
+
+  .next-news-card-arrow {
+    top: 84%;
+    -webkit-box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
+    -moz-box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
+    box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
+  }
+
+}
+
+@media (max-width: 800px) {
+
+  .next-news-card-arrow-desktop {
+    display: none;
+  }
+
+  .next-news-section-arrow-mobile {
+    display: block;
+  }
+
+}
 
 </style>

@@ -1,12 +1,8 @@
 <script setup lang="ts">
 
-import NextNews from "~/components/NextNews.vue";
-
 const { getNews } = usePopupNews()
 await getNews(window.location.pathname.slice(6))
 const { title, date, tags, newSrc, newCode, newDate, newTags, newTitle } = usePopupNews()
-
-console.log(newCode.value)
 
 async function getNewNews(code: string): Promise<void> {
   await getNews(code)
@@ -14,7 +10,6 @@ async function getNewNews(code: string): Promise<void> {
 }
 
 const emit = defineEmits(['closePopup'])
-
 
 </script>
 
@@ -25,12 +20,13 @@ const emit = defineEmits(['closePopup'])
        <button @click="$emit('closePopup')" class="popup-news-button--close">
          <img class="popup-news-button-img" src="@/public/image/close-btn.png" alt="Закрыть">
        </button>
+
        <div class="popup-news-content-container">
           <ul class="popup-news-content-nav">
-            <NuxtLink class="popup-news-content-link" to="/news">
+            <NuxtLink class="popup-news-content-link mobile-view" to="/news">
               ГЛАВНАЯ
             </NuxtLink>
-            <div class="popup-news-content-sep"></div>
+            <div class="popup-news-content-sep mobile-view"></div>
             <NuxtLink class="popup-news-content-link" to="/news">
               НОВОСТИ
             </NuxtLink>
@@ -39,6 +35,7 @@ const emit = defineEmits(['closePopup'])
               {{ title }}
             </li>
           </ul>
+
          <div class="popup-news-content-tags">
            <div class="popup-news-content-tag"  v-for="(tag, index) in tags" :key="index">
              <div v-for="(type, index) in tag.values" :key="index">
@@ -51,6 +48,7 @@ const emit = defineEmits(['closePopup'])
              </div>
            </div>
          </div>
+
          <h1 class="popup-news-content-title-description">
            {{ title }}
          </h1>
@@ -61,6 +59,7 @@ const emit = defineEmits(['closePopup'])
            Следующая статья
          </h3>
          <NextNews v-if="newCode !== null" @click="getNewNews(newCode)" style="cursor: pointer" :src="newSrc" :tags="newTags" :date="newDate" :title="newTitle" ></NextNews>
+
        </div>
      </div>
    </section>
@@ -192,5 +191,42 @@ padding-left: 36px;
   display: flex;
   gap: 4px;
 }
+
+@media (max-width: 1200px) {
+  .popup-news-content-container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 800px) {
+
+  .popup-news-content {
+    width: calc(100% - 20px);
+  }
+
+  .popup-news-content-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    margin-right: 100px;
+  }
+
+}
+
+@media (max-width: 800px) {
+  .popup-news-content-title-description {
+    font-size: 24px;
+  }
+
+  .popup-news-content-next {
+    font-size: 20px;
+  }
+
+  .mobile-view {
+    display: none;
+  }
+}
+
+
 
 </style>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 const props = defineProps(["data"]);
-console.log("props", props.data.data.result);
 
 const { src, title, date, tags } = useNews();
 
@@ -14,31 +13,37 @@ tags.value = props.data.data.result.tags;
 <template>
   <section class="news-section">
     <div class="news-card-arrow">
-      <img src="@/public/image/arrow.png" alt="Открыть">
+      <img class="news-card-arrow-desktop" src="@/public/image/arrow.png" alt="Открыть">
+      <img class="news-section-arrow-mobile" src="@/public/image/mobile-arrow.png" alt="Открыть">
     </div>
+
     <div class="news-card-date">
       {{ date }}
     </div>
+
     <div class="news-card">
       <div class="news-card-poster">
         <img class="news-card-image" :src="src" alt="Картинка">
       </div>
+
       <div class="news-card-content">
         <div class="news-card-content-title">
           {{ title }}
         </div>
+
         <div class="news-card-content-links">
-          <div v-for="(tag, index) in tags" :key="index">
-            <div v-for="(type, index) in tag.values" :key="index">
-              <button :style="{ color: type.color, borderColor: type.color }" class="news-card-content-button">
+          <div class="news-card-content-tag" v-for="(tag, index) in tags" :key="index">
+            <div class="news-card-content-type" v-for="(type, typeIndex) in tag.values" :key="typeIndex">
+              <div class="news-card-content-block" :style="{ color: type.color, borderColor: type.color }" >
                 <div v-if="type.src">
                   <img :src="type.src" alt="1" />
                 </div>
                 {{ type.name }}
-              </button>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -50,7 +55,7 @@ tags.value = props.data.data.result.tags;
   position: relative;
   margin: 0 auto;
   cursor: pointer;
-  width: 1056px;
+  max-width: 1056px;
 }
 
 .news-card {
@@ -122,7 +127,7 @@ tags.value = props.data.data.result.tags;
   padding-bottom: 20px;
 }
 
-.news-card-content-button {
+.news-card-content-block {
   background: none;
   font-size: 14px;
   font-weight: 400;
@@ -131,5 +136,73 @@ tags.value = props.data.data.result.tags;
   border-radius: 20px;
 }
 
+.news-card-content-type {
+  display: flex;
+  gap: 4px;
+}
+
+.news-card-content-tag {
+  display: flex;
+  gap: 4px;
+}
+
+.news-section-arrow-mobile {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .news-card-content-title {
+    font-size: 18px;
+    max-width: 380px;
+  }
+
+  .news-card-arrow {
+    width: 60px;
+    height: 60px;
+  }
+
+}
+
+@media (max-width: 1000px) {
+  .news-card {
+    flex-direction: column;
+    gap: 16px;
+    mask-image: none;
+    margin-bottom: 20px;
+    background-color: white;
+  }
+
+  .news-card-content {
+    gap: 16px;
+  }
+
+  .news-card-content-title {
+    font-size: 14px ;
+  }
+
+   .news-card-poster {
+     width: 100%;
+     height: 100%;
+   }
+
+  .news-card-arrow {
+    top: 90%;
+    -webkit-box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
+    -moz-box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
+    box-shadow: 1px 2px 12px -2px rgba(34, 60, 80, 0.26);
+  }
+
+}
+
+@media (max-width: 800px) {
+
+  .news-card-arrow-desktop {
+    display: none;
+  }
+
+  .news-section-arrow-mobile {
+    display: block;
+  }
+}
 
 </style>

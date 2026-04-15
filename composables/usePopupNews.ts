@@ -1,5 +1,5 @@
 import type {Tag} from '~/types/newsTypes'
-import {CurrentNews, NewNews} from '~/utils/baseNews.ts'
+import {CurrentNews, NewNews} from '~/utils/baseNews'
 
 
 export const usePopupNews = () => {
@@ -14,7 +14,7 @@ export const usePopupNews = () => {
     const newNewsDate = useState<string>('newNewsDate', () => '')
     const newNewsTags = useState<Tag[] | null>('newNewsTags', () => null)
 
-    async function getNews(code) {
+    async function getNews(code: string): Promise<void> {
         const data: any = await useFetch(`https://bsk-admin-test.testers-site.ru/api/news/${code}`)
 
         const currentNews = new CurrentNews(data.data.value.data.result)

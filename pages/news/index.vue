@@ -4,8 +4,7 @@ const { data, pending, error } = await useFetch('https://bsk-admin-test.testers-
 
 let isOpen = ref<boolean>(false);
 
-const code = data.value.data.result.code
-console.log(code)
+const code: string = data.value.data.result.code
 
 function openPopup() {
   isOpen.value = true;
@@ -85,6 +84,18 @@ function closePopup() {
   margin: 0 auto;
   display: block;
   padding: 0;
+  width: 100%;
+  background: none;
+}
+
+@media (max-width: 800px) {
+  .news {
+    max-width: calc(100% - 24px);
+  }
+
+  .news-container {
+    max-width: calc(100% - 20px);
+  }
 }
 
 </style>

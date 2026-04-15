@@ -4,6 +4,7 @@
       <div>
         <img src="@/public/icons/bsk.png" alt="Главная">
       </div>
+
       <ul class="header-nav">
         <li class="header-nav-to active">
           Объекты
@@ -30,12 +31,14 @@
           <div class="header-nav-button-content"></div>
         </button>
       </ul>
+
       <div class="header-call">
         <img src="@/public/icons/tel.png" alt="Номер">
         <div>
           +7 (4832) 32-15-68
         </div>
       </div>
+
     </div>
   </header>
 </template>
@@ -141,6 +144,17 @@ header {
 @media only screen and (max-width: 1024px) {
   .header-nav {
     display: none;
+  }
+
+}
+
+@media (max-width: 800px) {
+  header {
+    max-width: calc(100% - 24px);
+  }
+
+  .header-container {
+    max-width: calc(100% - 20px);
   }
 }
 
